@@ -9,7 +9,7 @@ define munin::client::register (
   $group        = $munin::client::munin_group,
 ){
 
-  @@concat::fragment{ "munin_client_${fqdn}_${port}":
+  @@concat::fragment{ "munin_client_${::fqdn}_${port}":
     target  => '/etc/munin/munin.conf',
     content => template('munin/client.erb'),
     tag     => $export_tag,

@@ -4,7 +4,7 @@
 class munin::params {
 
   $version = 'installed'
-  
+
   case $::osfamily {
     redhat: {
       $user           = 'root'
