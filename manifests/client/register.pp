@@ -1,5 +1,5 @@
 # Register a munin client
-define munin::client::register (
+class munin::client::register (
   $host         = $munin::client::target,
   $port         = $munin::client::port,
   $use_ssh      = $munin::client::use_ssh,
