@@ -9,8 +9,8 @@ pid_file /var/run/munin/munin-node.pid
 background 1
 setsid 1
 
-user <%= @user %>
-group <%= @group %>
+user <%= scope.lookupvar('munin::params::user') %>
+group <%= scope.lookupvar('munin::params::group') %>
 
 # This is the timeout for the whole transaction.
 # Units are in sec. Default is 15 min
@@ -34,7 +34,7 @@ ignore_file \.pod$
 # Set this if the client doesn't report the correct hostname when
 # telnetting to localhost, port 4949
 #
-host_name <%= scope.lookupvar('munin::client::host_name') %>
+host_name <%= scope.lookupvar('munin::client::target') %>
 
 # A list of addresses that are allowed to connect.  This must be a
 # regular expression, since Net::Server does not understand CIDR-style
@@ -56,7 +56,7 @@ allow <%= "^#{Regexp.escape(allow)}$" %>
 # cidr_deny  192.0.2.42/32
 
 # Which address to bind to;
-host <%= scope.lookupvar('munin::client::host') %>
+host <%= scope.lookupvar('munin::client::listen') %>
 
 # And which port
 port <%= scope.lookupvar('munin::client::port') %>
