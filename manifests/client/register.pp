@@ -1,5 +1,5 @@
 # Register a munin client
-define munin::register (
+define munin::client::register (
   $host         = $::fqdn,
   $port         = '4949',
   $use_ssh      = false,
