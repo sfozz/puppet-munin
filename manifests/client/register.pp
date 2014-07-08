@@ -1,20 +1,18 @@
 # Register a munin client
 define munin::client::register (
-  $host         = $::fqdn,
-  $port         = '4949',
-  $use_ssh      = false,
-  $description  = 'absent',
-  $config       = [],
-  $export_tag   = 'munin',
-  $group        = 'absent',
-)
-{
-  $fhost = $name
-  $client_type = 'client'
+  $host         = $munin::client::target,
+  $port         = $munin::client::port,
+  $use_ssh      = $munin::client::use_ssh,
+  $description  = $munin::client::description,
+  $config       = $munin::client::config,
+  $export_tag   = $munin::client::export_tag,
+  $group        = $munin::client::munin_group,
+){
 
-  @@concat::fragment{ "munin_client_${fhost}_${port}":
+  @@concat::fragment{ "munin_client_${fqdn}_${port}":
     target  => '/etc/munin/munin.conf',
     content => template('munin/client.erb'),
     tag     => $export_tag,
   }
+
 }
